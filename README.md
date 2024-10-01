@@ -121,11 +121,12 @@ This information is stored in file `buttonsPressed.log`: please refer to the [st
 
 - Install `steplogger` and `steplogger_client` apps. 
 If you plan to upload the `.apk` files on your smartphone and install them manually, remember to enable installation from unknown sources in you smartphones, otherwise the installation will fail. 
-Moreover, new versions of Android OS require you to allow running apps in overlay mode as shown in the follwing screenshot (italian language). Click on `install anyway` button:
+You may see a warning message indicating that the app was developed for an older version of Android. You may proceed anyway:
 
-![Authorize overlay mode](resources/images/overlay_auth.png)
+![Old warning](resources/images/old_warning.png)
 
-At this point, Android will show you a list of all apps allowed to run in overlay mode; look for `steplogger` and enable it, as well:
+Moreover, new versions of Android OS require you to allow running apps in overlay mode.
+Android will show you a list of all apps allowed to run in overlay mode; look for StepLogger and enable it, as well:
 
 ![List overaly mode](resources/images/list_over.png)
 
