@@ -9,10 +9,10 @@
 **Remember: Test your localization app + steplogger with a testing path of 15+ minutes in order to ensure the robustness of your localization app.**
 
 This repository includes 4 submodules:
-- `steplogger`: An Android app that includes :
-    - an overlay-based  GUI that presents a button that a competitor can press to record the current timestamp.
-    - a logging service that logs the positions computed by a competitor app, and to log the timestamps of clicks on the overlay button;
-- `steplogger_fullscreen`: A variant of `steplogger` that runs as a full-screen app (buttons are full-screen instead of small overlays).
+- `steplogger`: An Android app with:
+    - an overlay-based  GUI that presents a button that a competitor can press to record the current timestamp;
+    - a logging service that logs the positions computed by a competitor app, and logs the timestamps of clicks on the overlay button;
+- `steplogger_fullscreen`: A variant of `steplogger` that runs as a full-screen app (buttons are full-screen instead of small overlays). Except where noted, what we explain below about `steplogger` also applies to `steplogger_fullscreen`;
 - `steplogger_client`: An Android test app that generates fake positions and invokes the logging system of `steplogger`/`steplogger_fullscreen`.
 - `evaalscore`: The octave/matlab code used to evaluate competitor apps.
 
@@ -48,7 +48,7 @@ Access the `steplogger` code and copy the AIDL interface file (/app/src/main/aid
 ![Example of AIDL file](resources/images/AIDL.png)
 
 - Add the AIDL file under the Java package: `it.cnr.isti.steplogger`
-- If your app is built with API Level 30 and above, declare that you're using the steploggerService in your `AndroidManifest.xml`:
+- If your app is built with API Level 30 and above, declare that you're using the steplogger service in your `AndroidManifest.xml`:
 
 ```
         <queries>
@@ -88,7 +88,7 @@ When you click `START LOGGING POSITION`:
     -- It binds to the service with the Android call:
     
 
-        bindService(intentService, mConnection , Context.BIND_AUTO_CREATE);
+        bindService(intentService, mConnection, Context.BIND_AUTO_CREATE);
 
 
     -- It invokes method `logPosition()` twice per second, with randomly generated x, y, and z coordiantes.
@@ -104,7 +104,7 @@ The app shows a full screen button.
 
 During the competition a competitor will walk along a predefined path within the evaluation site.
 Along the path several markers, each with a different label, will be placed on the floor.
-The competitor is supposed to press the button shown dy `steplogger` whenever he/she walks over one of the markers.
+The competitor is supposed to press the button shown by `steplogger` whenever he/she walks over one of the markers.
 The label on the button changes with clicks and reminds the competitor which is the next marker to be encountered along the path.
 In other words the competitor will press the button with label X as soon as he/she walks over the correspondingly labeled marker X.
 
@@ -113,7 +113,7 @@ Every time the button is pressed, `steplogger` logs the following information:
 - Timestamp: this time is gathered from the smartphone clock 
 - The current button label
 
-This information is stored in file `buttonsPressed.log`: please refer to the [steplogger Logging mechanism](#steplogger-logging-mechanism) section for information about the logs.
+This information is stored in file `buttonsPressed.log`: please refer to the [steplogger logging mechanism](#steplogger-logging-mechanism) section for information about the logs.
 
 ### How to start a new measurement session
 
@@ -162,7 +162,7 @@ As for `steplogger_fullscreen`, all the previous steps are the same. The GUI is 
 
 
 
-### steplogger Logging mechanism
+### steplogger logging mechanism
 `steplogger` writes the logs generated during the measurement session to the `Download` directory of the devices running `steplogger`. Inside the `Download` directory, `steplogger` archives the log files in the folder named: `it.cnr.isti.steplogger`. For example the full path of the smartphone used for tests is:
 ```
     storage/sdcard0/Download/it.cnr.isti.steplogger/
