@@ -58,10 +58,10 @@ Access the steplogger submodule and copy the AIDL interface file (/app/src/main/
 - Invoke the `logPosition()` method by following these steps:
     - Create an Intent object
     - Set the class name of the intent object with:
-```
-        BOUNDSERVICE_PACKAGE = "it.cnr.isti.steplogger";
-        BOUNDSERVICE_CLASS = ".steploggerService";
-```
+
+	BOUNDSERVICE_PACKAGE = "it.cnr.isti.steplogger";
+	BOUNDSERVICE_CLASS = ".steploggerService";
+
 
 - Invoke the `bindService(…)` method provided by the Android OS in order to bind to the service that matches the above `BOUNDSERVICE_PACKAGE` and `BOUNDSERVICE_CLASS`
 ```
@@ -160,13 +160,13 @@ Test mode should be off during the measurement session
 
 ### steplogger Logging mechanism
 `steplogger` writes the logs generated during the measurement session to the `Download` directory of the devices running `steplogger`. Inside the `Download` directory, `steplogger` archives the log files in the folder named: `it.cnr.isti.steplogger`. For example the full path of the smartphone used for tests is:
-
-	storage/sdcard0/Download/it.cnr.isti.steplogger/
-
+```
+    storage/sdcard0/Download/it.cnr.isti.steplogger/
+```
 Within the folder `it.cnr.isti.steplogger/` `steplogger` creates a folder for every measurement session, the logs are placed in folder whose name follows this convention:
-
-	[YearMonthDay]T[HourMinutesSeconds][Competitor ID]
-
+```
+    [YearMonthDay]T[HourMinutesSeconds][Competitor ID]
+```
 The following image shows an example of the names assigned to the folders for the measurement sessions.
 
 ![Example of logs](resources/images/logs.png)
@@ -174,7 +174,7 @@ The following image shows an example of the names assigned to the folders for th
 Every folder contains the logs of the measurement session(s) related to the `Competitor ID`. For every measurement session `steplogger` creates two files:
 
 - `buttonsPressed.log`: logs the time stamp and the label of the button pressed
-- `positions.log`: logs the time stamp and the position (x,y,z) notified by the app of the competitors
+- `positions.log`: logs the time stamp and the position (x,y,z) notified by the competitor app
 
 [Example of logs to download](resources/logs.zip)
 
