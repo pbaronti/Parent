@@ -125,8 +125,8 @@ You may see a warning message indicating that the app was developed for an older
 
 ![Old warning](resources/images/old_warning.png)
 
-Moreover, new versions of Android OS require you to allow running apps in overlay mode.
-Android will show you a list of all apps allowed to run in overlay mode; look for StepLogger and enable it, as well:
+Moreover, newer versions of Android OS require you to allow running apps in overlay mode.
+Android will show you a list of all apps allowed to run in overlay mode; look for StepLogger, click it, and enable it to run over other apps:
 
 ![List overaly mode](resources/images/list_over.png)
 
