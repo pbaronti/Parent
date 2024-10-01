@@ -10,13 +10,13 @@
 
 This repository includes 4 submodules:
 - `steplogger`: An Android app that includes :
-    - an overlay-based  GUI that presents buttons users can press to record the current timestamp.
-    - a logging service designed to log the positions computed by a competitor app, and to log the timestamps of clicks on the overlay buttons;
+    - an overlay-based  GUI that presents a button that a competitor can press to record the current timestamp.
+    - a logging service that logs the positions computed by a competitor app, and to log the timestamps of clicks on the overlay button;
 - `steplogger_fullscreen`: A variant of `steplogger` that runs as a full-screen app (buttons are full-screen instead of small overlays).
 - `steplogger_client`: An Android test app that generates fake positions and invokes the logging system of `steplogger`/`steplogger_fullscreen`.
 - `evaalscore`: The octave/matlab code used to evaluate competitor apps.
 
-**To clone this repo with all submodules run command**
+**To clone this repo with all submodules run command:**
 ```
     git clone --recursive https://github.com/wnlab-isti/IPIN-competition_track1.git
 ```
@@ -28,22 +28,22 @@ Installing and testing `steplogger_client` + `steplogger` will allow you to repr
 Here we describe the mechanism that a competitor app will use to communicate with `steplogger`.
 
 `steplogger` implements and exports a simple service, with the following Java-method API:
-```
+```        
     void logPosition(in long timestamp, in double x,in double y, in double z);
-```
+```    
 
 This method must be invoked through the [AIDL](https://developer.android.com/guide/components/aidl) interface. 
-In particular, competitors are required to add the `steplogger` AIDL file to their Android project and invoke the `logPosition` method **twice per second** in order to log the estimated position with a frequency of 2Hz.
+In particular, competitors are required to add the `steplogger` AIDL file to their Android project and invoke the `logPosition()` method **twice per second** in order to log the estimated position with a frequency of 2Hz.
 
-Every time the `logPosition` method is invoked, steplogger logs the following information:
+Every time `logPosition()` is invoked, `steplogger` logs the following information:
 
-- Timestamp: time in milliseconds from the Unix epoch, as returned from calling the Java method `System.currentTimeMillis()`;
-- Coordinates `x, y, z` : `x` and `y` are longitude and latitude, respectively, in the WGS84 reference system, while `z` is the floor, that is an integer number, with 0 indicating the ground floor.
+- Timestamp: time in milliseconds from the Unix epoch, as returned from Java method `System.currentTimeMillis()`;
+- Coordinates `x, y, z` : `x` and `y` are longitude and latitude, respectively, in the WGS84 reference system, while `z` is the floor as an integer number, with 0 indicating the ground floor.
 
 `steplogger` saves this information in file `positions.log`, as detailed below in Section: [steplogger logging mechanism](#steplogger-logging-mechanism) 
 
 ### How to use the AIDL logging interface
-Access the steplogger submodule and copy the AIDL interface file (/app/src/main/aidl/it/cnr/isti/steplogger/IsteploggerService.aidl) in the `aidl` folder of your Android project
+Access the `steplogger` code and copy the AIDL interface file (/app/src/main/aidl/it/cnr/isti/steplogger/IsteploggerService.aidl) in the `aidl` folder of your Android project
 
 ![Example of AIDL file](resources/images/AIDL.png)
 
@@ -58,19 +58,21 @@ Access the steplogger submodule and copy the AIDL interface file (/app/src/main/
 - Invoke the `logPosition()` method by following these steps:
     - Create an Intent object
     - Set the class name of the intent object with:
+    
+```
+        BOUNDSERVICE_PACKAGE = "it.cnr.isti.steplogger";
+        BOUNDSERVICE_CLASS = ".steploggerService";
+```
 
-	BOUNDSERVICE_PACKAGE = "it.cnr.isti.steplogger";
-	BOUNDSERVICE_CLASS = ".steploggerService";
+- Invoke the `bindService()` method provided by the Android OS in order to bind to the service that matches the above `BOUNDSERVICE_PACKAGE` and `BOUNDSERVICE_CLASS`
 
-
-- Invoke the `bindService(…)` method provided by the Android OS in order to bind to the service that matches the above `BOUNDSERVICE_PACKAGE` and `BOUNDSERVICE_CLASS`
 ```
         void bindService(in Intent intentService, in ServiceConnection mConnection, in int flags);
 ```
 
 Now you can test the interaction between `steplogger_client` and `steplogger`:
 
-- Start the `steplogger_client` app. This app provides an **example** of how the competing app should interact with the `steplogger` app. `steplogger_client` shows a GUI with two buttons: `START LOGGING POSITION` and `STOP LOGGING POSITION`.
+- Start the `steplogger_client` app. This app provides an **example** of how the competitor app should interact with the  `steplogger` app. `steplogger_client` shows a GUI with two buttons: `START LOGGING POSITION` and `STOP LOGGING POSITION`.
 These buttons allow you to start and stop a logging session.
 
 ![steplogger_client](resources/images/stepLoggerClient.png)
@@ -78,17 +80,18 @@ These buttons allow you to start and stop a logging session.
 When you click `START LOGGING POSITION`:
 - The `StepLoggerClientActivity` creates an intent object and it sends it to the `StepLoggerClientService`
 - The `StepLoggerClientService` manages the intent received with the following steps:
-    - It creates an intent for invoking the `logPosition` service:
-```
+    
+    --It creates an intent for invoking the `logPosition` service:
+    
         intentService.setClassName(BOUNDSERVICE_PACKAGE, BOUNDSERVICE_PACKAGE + BOUNDSERVICE_CLASS);
-```
 
-    - It binds to the service with the Android call:
-```
+    -- It binds to the service with the Android call:
+    
+
         bindService(intentService, mConnection , Context.BIND_AUTO_CREATE);
-```
 
-    - It invokes method `logPosition()` twice per second, with randomly generated x, y, and z coordiantes.
+
+    -- It invokes method `logPosition()` twice per second, with randomly generated x, y, and z coordiantes.
 
 ![Random positions](resources/images/code.png)
 
@@ -152,9 +155,9 @@ Some options are available on the top-right menu:
 - Settings are available on the top-right menu, it allows to switch to test mode. In test mode `steplogger` does not log any file. 
 Test mode should be off during the measurement session
 
--------Concerning steplogger `(overlay)`, all the previous steps are the same. The GUI is slightly different:
+As for `steplogger_fullscreen`, all the previous steps are the same. The GUI is slightly different:
 
-![steplogger overlay](resources/images/steplogger_over.png)
+![steplogger fullscrees](resources/images/app5.png)
 
 
 
