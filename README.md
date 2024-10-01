@@ -164,30 +164,31 @@ As for `steplogger_fullscreen`, all the previous steps are the same. The GUI is 
 
 
 ### steplogger logging mechanism
-`steplogger` writes the logs generated during the measurement session to the `Download` directory of the devices running `steplogger`. Inside the `Download` directory, `steplogger` archives the log files in the folder named: `it.cnr.isti.steplogger`. For example the full path of the smartphone used for tests is:
+`steplogger` writes the logs generated during the measurement session to the `Download` directory of the devices running `steplogger`. Inside the `Download` directory, `steplogger` archives the log files in a folder named: `it.cnr.isti.steplogger`. For example the full path of the smartphone used for tests is:
 ```
     storage/sdcard0/Download/it.cnr.isti.steplogger/
 ```
-Within the folder `it.cnr.isti.steplogger/` `steplogger` creates a folder for every measurement session, the logs are placed in folder whose name follows this convention:
+Within `it.cnr.isti.steplogger/`,  `steplogger` creates a new folder for every measurement session. The name of this folder follows this convention:
 ```
     [YearMonthDay]T[HourMinutesSeconds][Competitor ID]
 ```
+Log files for a measurement are placed inside this folder.
 The following image shows an example of the names assigned to the folders for the measurement sessions.
 
 ![Example of logs](resources/images/logs.png)
 
 Every folder contains the logs of the measurement session(s) related to the `Competitor ID`. For every measurement session `steplogger` creates two files:
 
-- `buttonsPressed.log`: logs the time stamp and the label of the button pressed
+- `buttonsPressed.log`: logs the timestamp and the label of the button pressed
 - `positions.log`: logs the time stamp and the position (x,y,z) notified by the competitor app
 
 [Example of logs to download](resources/logs.zip)
 
+## Notes
 
-
-- Code your localization app so that it is possibile to :
-	- halt the system
-	- stop invoking the AIDL interface
+Code your competitor app so that it is possibile to:
+- halt the system
+- stop invoking the AIDL interface
 
  
 For any question that might be potentially of interest for all the competitors use the mailing list: <contest@evaal.aaloa.org>
