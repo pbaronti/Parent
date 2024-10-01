@@ -121,11 +121,11 @@ This information is stored in file `buttonsPressed.log`: please refer to the [st
 
 - Install `steplogger` and `steplogger_client` apps. 
 If you plan to upload the `.apk` files on your smartphone and install them manually, remember to enable installation from unknown sources in you smartphones, otherwise the installation will fail. 
-You may see a warning message indicating that the app was developed for an older version of Android. You may proceed anyway:
+Also, you may see a warning message indicating that the app was developed for an older version of Android. You may proceed anyway:
 
 ![Old warning](resources/images/old_warning.png)
 
-Moreover, newer versions of Android OS require you to allow running apps in overlay mode.
+- Newer versions of Android require you to allow running apps in overlay mode.
 Android will show you a list of all apps allowed to run in overlay mode; look for StepLogger, click it, and enable it to run over other apps:
 
 ![List overaly mode](resources/images/list_over.png)
@@ -141,12 +141,13 @@ Android will show you a list of all apps allowed to run in overlay mode; look fo
 
 ![Insert a name](resources/images/app2.png)
 
+- `steplogger` updates the logs as soon as you press the button. When you switch to another app and then reopen `steplogger`, it resumes from the last button pressed. The following images show the overlay button positioned in the bottom right corner of the device screen.
+
 ![start logging](resources/images/app3.png)
 
 ![start logging](resources/images/app4.png)
 
 
-- `steplogger` updates the logs as soon as you press the button. When you switch to another app and then reopen `steplogger`, it resumes from the last button pressed.
 - After stepping over all the markers, `steplogger` finalizes the log files and shows a white screen
 
 Some options are available on the top-right menu:
