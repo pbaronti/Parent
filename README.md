@@ -73,7 +73,7 @@ Now you can test the interaction between `steplogger_client` and `steplogger`:
 - Start the `steplogger_client` app. This app provides an **example** of how the competing app should interact with the `steplogger` app. `steplogger_client` shows a GUI with two buttons: `START LOGGING POSITION` and `STOP LOGGING POSITION`.
 These buttons allow you to start and stop a logging session.
 
-![steplogger_client](resources/images/steplogger_client.png)
+![steplogger_client](resources/images/stepLoggerClient.png)
 
 When you click `START LOGGING POSITION`:
 - The `StepLoggerClientActivity` creates an intent object and it sends it to the `StepLoggerClientService`
